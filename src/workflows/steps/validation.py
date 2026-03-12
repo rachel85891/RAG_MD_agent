@@ -14,7 +14,7 @@ async def validate_retrieval_quality(ctx: Context,
     # בדיקת ה-Score של ה-Node הראשון (הכי רלוונטי)
     top_score = ev.nodes[0].score if ev.nodes[0].score is not None else 0
 
-    if top_score < 0.7:
+    if top_score < 0.5:
         print(f"⚠️ Validation: Low confidence score ({top_score:.2f})")
         return ValidationFailedEvent(error_msg="המידע שנמצא אינו רלוונטי מספיק.")
 

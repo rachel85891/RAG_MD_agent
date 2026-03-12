@@ -20,6 +20,7 @@
       <change beforePath="$PROJECT_DIR$/src/workflows/steps/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/steps/generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/workflows/steps/input_guard.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/steps/input_guard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/workflows/steps/retrieval.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/steps/retrieval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/workflows/steps/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/steps/validation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
