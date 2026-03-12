@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fabf60e-e1b2-4e96-a1ec-aabfa820c4e2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/data/structured_store.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/schemas/extraction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/extraction_service.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/workflows/steps/router.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/workflows/steps/structured_query.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/visualize_workflow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/extraction_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/extraction_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/rag_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/rag_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/workflows/events.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/events.py" afterDir="false" />
