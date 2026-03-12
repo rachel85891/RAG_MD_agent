@@ -108,6 +108,85 @@
                 "Developer Experience",
                 "Maintainability"
             ]
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Migrating to TypeScript",
+            "summary": "The decision to migrate the entire codebase from JavaScript to TypeScript was made to improve type safety, developer experience, and maintainability.",
+            "tags": []
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Choice of Styling Framework",
+            "summary": "Decided to use Tailwind CSS exclusively for all styling, avoiding external CSS files or CSS modules.",
+            "tags": [
+                "styling",
+                "framework"
+            ]
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Use of TypeScript",
+            "summary": "Selected TypeScript for all new components to ensure type safety.",
+            "tags": [
+                "programming",
+                "language"
+            ]
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Mobile-First Design Approach",
+            "summary": "We will use a mobile-first responsive design approach for components.",
+            "tags": [
+                "design",
+                "responsive"
+            ]
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Tech Stack Selection",
+            "summary": "The project will use React (Vite) for the frontend, Node.js with Express.js for the backend, and PostgreSQL for the database.",
+            "tags": []
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Database Selection",
+            "summary": "Selected PostgreSQL as the database for the project.",
+            "tags": []
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Connection Pooling",
+            "summary": "Decided to configure connection pooling using the `pg` library.",
+            "tags": []
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "API Server Memory Limit",
+            "summary": "The API server is capped at 2GB RAM per instance.",
+            "tags": []
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Session Management with Redis",
+            "summary": "All user sessions and distributed locks are managed via Redis.",
+            "tags": []
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "title": "Database Connection Pooling",
+            "summary": "Maximum concurrent connections to PostgreSQL are limited to 20.",
+            "tags": []
         }
     ],
     "rules": [
@@ -1040,6 +1119,102 @@
             "observed_at": "2026-03-12T19:57:02.391656",
             "rule_text": "Always release connections in a finally block.",
             "scope": "Database Connection Pooling"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "The application must fully support Hebrew and Arabic interfaces.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Use the HTML attribute `dir=\"rtl\"` on the root element when the language is set to Hebrew/Arabic.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Avoid using `ml-` (margin-left) or `pr-` (padding-right). Instead, use logical properties like `ms-` (margin-start) and `pe-` (padding-end) to ensure layout flips correctly between LTR and RTL.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Text alignment should default to `text-start`.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Ensure all text passes WCAG AA contrast ratios against the primary Dark Blue (#001f3f) background.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "All interactive elements (buttons, links, inputs) must have a visible `:focus` state.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Every icon-only button must include an `aria-label` describing its function.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Use `<main>`, `<nav>`, and `<section>` tags instead of generic `<div>` wrappers where possible.",
+            "scope": "UI & Accessibility Rules"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Write clean, modular code following DRY (Don't Repeat Yourself) principles.",
+            "scope": "All developers"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "All table names should be lowercase and plural.",
+            "scope": "Database schema"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Always include `created_at` and `updated_at` timestamps for every table.",
+            "scope": "Database schema"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "The system must follow a client-server architecture to ensure scalability and separation of concerns.",
+            "scope": "All components of the system."
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Environment configuration must include .env files for DB credentials and API ports.",
+            "scope": "All environments"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Sessions are set to expire after 24 hours of inactivity.",
+            "scope": "Session Management"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Always use the redis-client wrapper to ensure atomic operations during session updates.",
+            "scope": "Session Management"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "rule_text": "Always release connections in a finally block when using pg-pool.",
+            "scope": "Database Connection Pooling"
         }
     ],
     "warnings": [
@@ -1097,6 +1272,20 @@
             "observed_at": "2026-03-12T19:57:02.391656",
             "sensitive_area": "Auth Middleware",
             "message": "Do NOT modify the Auth Middleware (src/middleware/auth.ts) under any circumstances without explicit, documented approval from the Lead Developer. Any changes to the JWT verification logic or role-based access control (RBAC) could create severe security vulnerabilities.",
+            "severity": "High"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "sensitive_area": "Code Quality",
+            "message": "Be careful to document complex functions with JSDoc comments to maintain code quality.",
+            "severity": "Low"
+        },
+        {
+            "source_file": "unknown_source",
+            "observed_at": "2023-10-05T00:00:00Z",
+            "sensitive_area": "Auth Middleware",
+            "message": "Do NOT modify the Auth Middleware under any circumstances without explicit, documented approval from the Lead Developer. Any changes to the JWT verification logic or role-based access control (RBAC) could create severe security vulnerabilities.",
             "severity": "High"
         }
     ],

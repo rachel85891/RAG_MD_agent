@@ -1,5 +1,7 @@
 import os
 from typing import List
+
+from dateutil.utils import today
 from llama_index.core.program import LLMTextCompletionProgram
 from llama_index.program.openai import OpenAIPydanticProgram
 from src.schemas.extraction import ExtractedProjectData
@@ -13,9 +15,24 @@ class ExtractionService:
         self.program = OpenAIPydanticProgram.from_defaults(
             output_cls=ExtractedProjectData,
             prompt_template_str=(
-                "You are an expert data extractor. Extract all decisions, rules, and warnings "
-                "from the following text. If a certain category is not found, return an empty list. "
-                "Ensure that 'source_file' is set to '{source_file}'.\n"
+                "You are a specialized Technical Analyst. Your goal is to parse developer documentation "
+                "and extract structured insights into the following categories:\n\n"
+
+                "1. **Decisions**: Look for architectural choices, database selections, or logic definitions. "
+                "Keywords: 'decided', 'selected', 'using', 'we will use', 'choice'.\n"
+
+                "2. **Rules**: Look for mandatory constraints or coding standards. "
+                "Keywords: 'must', 'should', 'always', 'required', 'convention', 'RTL', 'naming'.\n"
+
+                "3. **Warnings**: Look for risks, sensitive areas, or things to avoid. "
+                "Keywords: 'be careful', 'warning', 'do not touch', 'sensitive', 'risk', 'high severity'.\n\n"
+
+                "GUIDELINES:\n"
+                "- If a piece of information is ambiguous, lean towards including it.\n"
+                "- Capture the essence of the instruction in the summary/message fields.\n"
+                "- Use the current date for 'observed_at' if not specified.\n"
+                "- The source file for all extracted items must be: '{source_file}'.\n\n"
+
                 "Text to analyze:\n"
                 "-------------------\n"
                 "{text}\n"
@@ -30,7 +47,8 @@ class ExtractionService:
         try:
             extracted_data = await self.program.acall(
                 text=text,
-                source_file=source_name
+                source_file=source_name,
+                current_date=today
             )
             return extracted_data
         except Exception as e:
