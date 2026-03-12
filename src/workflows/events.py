@@ -17,3 +17,11 @@ class ValidationPassedEvent(Event):
 class ValidationFailedEvent(Event):
     """נשלח כאשר התשובה לא עומדת בסטנדרטים (מפעיל לולאת Retry)"""
     error_msg: str
+
+class StructuredQueryEvent(Event):
+    """אירוע לחיפוש בתוך ה-JSON המובנה"""
+    query: str
+
+class RetrievalEvent(Event):
+    """אירוע לחיפוש וקטורי רגיל ב-Pinecone"""
+    query: str

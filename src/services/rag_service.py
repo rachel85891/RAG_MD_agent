@@ -7,6 +7,9 @@ from src.config.settings import app_settings
 from src.core.engine import create_query_engine
 from src.workflows.rag_workflow import RAGWorkflow
 from llama_index.core.workflow import Context
+from src.services.extraction_service import ExtractionService
+from src.data.structured_store import StructuredStore
+import asyncio
 
 class RAGService:
     def __init__(self, index_name: str):
@@ -15,13 +18,23 @@ class RAGService:
         self.query_engine = None
         self.index = None
 
-    def ingest(self, paths: List[str]) -> None:
+    async def ingest(self, paths: List[str]) -> None:
 
 
         #מבצע את כל תהליך ה-Pipeline: טעינה, פירוק ל-Nodes ואינדוקס.
 
         # 1. טעינת מסמכים
         documents = load_markdown_docs(paths)
+
+        # --- הוספת שלב ה-Extraction ---
+        print("🧠 Step 2.5: Extracting structured data (Decisions, Rules, Warnings)...")
+        extraction_service = ExtractionService()
+        store = StructuredStore()
+
+        extracted_data = await extraction_service.process_documents(documents)
+
+        # שמירה ל-JSON
+        store.save(extracted_data)
 
          #2. פירוק ל-Nodes (Chunks) - חיוני לפני אינדוקס
 
@@ -33,9 +46,14 @@ class RAGService:
 
         # 4. יצירת מנוע השאילתות ושמירתו בזיכרון
         self.query_engine = create_query_engine(index)
-        print(f"Successfully indexed {len(nodes)} nodes to {self.index_name}")
+        print(f"✅ Successfully indexed {len(nodes)} nodes to {self.index_name}")
 
     async def query(self, question: str) -> str:
+
+        # אם מנוע השאילתות לא בזיכרון, ננסה לחבר אותו לאינדקס הקיים ב-Pinecone
+        if self.query_engine is None:
+            print("🔗 Connecting to existing Pinecone index...")
+            from src.core.engine import create_query_engine
 
         #מבצע שאילתה ומחזירה תשובה טקסטואלית.
         if not self.index and not self.query_engine:
@@ -44,7 +62,7 @@ class RAGService:
         workflow = RAGWorkflow(timeout=60, verbose=True)
 
         ctx = Context(workflow)
-        await ctx.set_data("rag_service", self)
+        await ctx.store.set("rag_service", self)
 
         print(f"🌀 Starting Workflow for query: {question}")
         try:

@@ -8,7 +8,7 @@ async def generate_final_response(ctx: Context, ev: ValidationPassedEvent) -> St
     """
     מייצר תשובה סופית באמצעות ה-LLM המוגדר ב-Settings.
     """
-    state: RAGState = await ctx.get_data("state")
+    state: RAGState = await ctx.store.get("state")
 
     # בניית הקונטקסט מה-Nodes
     context_str = "\n\n".join([n.node.get_content() for n in state.retrieved_nodes])
@@ -25,7 +25,7 @@ async def generate_final_response(ctx: Context, ev: ValidationPassedEvent) -> St
     response = await Settings.llm.acomplete(prompt)
 
     state.llm_response = str(response)
-    await ctx.set_data("state", state)
+    await ctx.store.set("state", state)
 
     print("✨ Generator: Final response created.")
     return StopEvent(result=state.llm_response)

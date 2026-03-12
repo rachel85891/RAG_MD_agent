@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fabf60e-e1b2-4e96-a1ec-aabfa820c4e2" name="Changes" comment="" />
+    <list default="true" id="6fabf60e-e1b2-4e96-a1ec-aabfa820c4e2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/data/structured_store.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/schemas/extraction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/extraction_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/workflows/steps/router.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/workflows/steps/structured_query.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/extracted_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/rag_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/rag_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/workflows/events.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/events.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/workflows/rag_workflow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/rag_workflow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/workflows/steps/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/steps/generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/workflows/steps/input_guard.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/steps/input_guard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/workflows/steps/retrieval.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/workflows/steps/retrieval.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +52,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "master"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -61,6 +77,17 @@
       <updated>1773306935627</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

@@ -6,7 +6,7 @@ from src.workflows.events import (
     QueryValidatedEvent,
     RetrievalDoneEvent,
     ValidationPassedEvent,
-    ValidationFailedEvent
+    ValidationFailedEvent, StructuredQueryEvent, RetrievalEvent
 )
 from src.workflows.state import RAGState
 from src.workflows.steps.input_guard import validate_input_query
@@ -28,7 +28,7 @@ class RAGWorkflow(Workflow):
         return await validate_input_query(ctx, ev)
 
     @step
-    async def step_retrieve(self, ctx: Context, ev: QueryValidatedEvent) -> RetrievalDoneEvent:
+    async def step_retrieve(self, ctx: Context, ev: RetrievalEvent) -> RetrievalDoneEvent:
         return await retrieve_context(ctx, ev)
 
     @step
@@ -41,6 +41,16 @@ class RAGWorkflow(Workflow):
         return await generate_final_response(ctx, ev)
 
     @step
+    async def step_route(self, ctx: Context, ev: QueryValidatedEvent) -> StructuredQueryEvent | RetrievalEvent:
+        from src.workflows.steps.router import route_query
+        return await route_query(ctx, ev)
+
+    @step
+    async def step_structured_query(self, ctx: Context, ev: StructuredQueryEvent) -> StopEvent:
+        from src.workflows.steps.structured_query import process_structured_query
+        return await process_structured_query(ctx, ev)
+
+    @step
     async def handle_retry_logic(self, ctx: Context, ev: ValidationFailedEvent) -> QueryValidatedEvent | StopEvent:
         """צעד התיקון נשאר כפי שהיה, הוא מובנה במחלקה"""
         state: RAGState = await ctx.get_data("state")
@@ -50,7 +60,7 @@ class RAGWorkflow(Workflow):
         """
         צעד תיקון: אם הוולידציה נכשלה, ננסה להרחיב את השאילתה פעם אחת בלבד.
         """
-        state: RAGState = await ctx.get_data("state")
+        state: RAGState = await ctx.store.get("state")
 
         if state.retry_count >= 1:
             print(f"❌ Workflow: Max retries reached. Error: {ev.error_msg}")
@@ -71,7 +81,7 @@ class RAGWorkflow(Workflow):
 
         # עדכון השאילתה ב-State ושליחה מחדש לשלב השליפה
         state.query = str(new_query)
-        await ctx.set_data("state", state)
+        await ctx.store.set("state", state)
 
         return QueryValidatedEvent(query=state.query)
 
@@ -81,8 +91,6 @@ async def run_rag_workflow(query: str, rag_service):
     wf = RAGWorkflow(timeout=60, verbose=True)
 
     # הזרקת שירותים ל-Context של הריצה
-    ctx = Context(wf)
-    await ctx.set_data("rag_service", rag_service)
 
-    result = await wf.run(query=query, ctx=ctx)
+    result = await wf.run(query=query, rag_service=rag_service)
     return result

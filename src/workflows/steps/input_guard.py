@@ -13,7 +13,7 @@ async def validate_input_query(ctx: Context, ev: StartEvent) -> QueryValidatedEv
         raise ValueError("השאילתה קצרה מדי או ריקה. אנא פרט יותר.")
 
     # שמירת השאילתה ב-State הגלובלי של הריצה
-    await ctx.set_data("state", RAGState(query=query))
+    await ctx.store.set("state", RAGState(query=query))
 
     print(f"🔍 InputGuard: Query validated: '{query[:30]}...'")
     return QueryValidatedEvent(query=query)

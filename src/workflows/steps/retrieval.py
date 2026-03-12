@@ -8,18 +8,22 @@ async def retrieve_context(ctx: Context, ev: QueryValidatedEvent) -> RetrievalDo
     מבצע שליפה מה-Vector Store (Pinecone) על בסיס השאילתה המאומתת.
     """
     # שליפת השירות מה-Context (נניח שהזרקנו אותו באתחול ה-Workflow)
-    rag_service = await ctx.get_data("rag_service")
+    rag_service = await ctx.store.get("rag_service")
 
-    # ב-LlamaIndex, ה-Query Engine מחזיר אובייקט Response שמכיל source_nodes
-    # לצורך הדוגמה, נניח שאנחנו משתמשים ב-Retriever ישירות
-    index = rag_service.query_engine._index  # גישה לאינדקס הקיים
-    retriever = index.as_retriever(similarity_top_k=3)
+    #  גישה בטוחה ל-Retriever
+    # במקום rag_service.query_engine._index, אנחנו ניגשים ל-retriever ישירות
+    if hasattr(rag_service.query_engine, "retriever"):
+        retriever = rag_service.query_engine.retriever
+    else:
+        # במידה ואין retriever מובנה, נשתמש במנוע השאילתות כ-retriever
+        retriever = rag_service.query_engine
+
     nodes = retriever.retrieve(ev.query)
 
     # עדכון ה-State
-    state: RAGState = await ctx.get_data("state")
+    state: RAGState = await ctx.store.get("state")
     state.retrieved_nodes = nodes
-    await ctx.set_data("state", state)
+    await ctx.store.set("state", state)
 
     print(f"📚 Retrieval: Found {len(nodes)} relevant nodes.")
     return RetrievalDoneEvent(nodes=nodes)

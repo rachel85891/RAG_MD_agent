@@ -7,10 +7,10 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 from src.config.settings import app_settings
 from src.services.rag_service import RAGService
-from src.ui.app import demo
+from src.ui.app import create_ui
 
 
-def main():
+async def main():
     print("🚀 Starting RAG Event-Driven Pipeline...")
 
     # 1. אתחול הגדרות (המרה מתבצעת אוטומטית בעת הייבוא בגלל ה-Singleton)
@@ -29,7 +29,7 @@ def main():
     print(f"📂 Step 2: Scanning data source: {DATA_PATH}...")
     try:
         # פונקציית ה-ingest מתוך ה-RAGService מחברת את ה-Loader וה-Vector Store
-        rag_service.ingest(DATA_PATH)
+        await rag_service.ingest(DATA_PATH)
         print("✅ Step 3: Indexing complete. All documents are now in Pinecone.")
     except Exception as e:
         print(f"❌ Error during ingestion: {str(e)}")
@@ -39,6 +39,7 @@ def main():
     print("\n🌐 Step 4: Launching Gradio UI...")
     print(f"--- Interface is being served on http://localhost:7860 ---")
 
+    demo = create_ui(rag_service)
     # הרצת ה-UI (מתוך src/ui/app.py)
     demo.launch(
         server_name="0.0.0.0",
